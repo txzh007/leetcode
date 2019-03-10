@@ -36,13 +36,14 @@
  */
 double findMedianSortedArrays(int *nums1, int nums1Size, int *nums2,
                               int nums2Size) {
-    int mid = (nums1Size + nums2Size) / 2;
-    int index1 = 0, index2 = 0;
-    for (int i = 0; i < mid; i++) {
-        if (nums1[index1] >= nums2[index2])
-            index1++;
-        else if () {
-            /* code */
-        }
+  int mid = (nums1Size + nums2Size) / 2;
+  int index1 = 0, index2 = 0;
+  for (int i = 0; i < mid; i++) {
+    if (index1 + index2 >= mid) {
+    } else if (nums1[index1] >= nums2[index2])
+      index1++;
+    else if (nums1[index1] < nums2[index2]) {
+      index2++;
     }
+  }
 }
