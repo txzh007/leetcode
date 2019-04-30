@@ -33,30 +33,23 @@
  * 所有输入只包含小写字母 a-z 。
  *
  */
-#include <string.h>
-char* longestCommonPrefix(char** strs, int strsSize) {
-  int str0len = strlen(strs[0]);
-  int min =0;
-  for (int i = 0; i < strsSize; i++) {
-    if (str0len < strlen(strs[i])) {
-      min = i;
-      str0len = strlen(strs[i]);
-    }
-  }
+char *longestCommonPrefix(char **strs, int strsSize) {
+    int maxLen = strlen(strs[0]);
+    char *result;
+    for (int i = 0; i < maxLen; i++) {
 
-  int maxPre = 0;
-  for (int i = 0; i < str0len; i++) {
-    for (int j = 1; j < strsSize; j++) {
-      if (strs[j][i] != strs[min][i]) {
-        i = 999;
-        maxPre--;
-        break;
-      }
+        for (int j = 1; j < strsSize; j++) {
+            if (strs[j][i] != strs[0][i]) {
+                printf("i=%d\n", i);
+                result = (char *)malloc(sizeof(char) * i);
+                printf("res length is %d\n", strlen(result));
+                for (int k = 0; k < i; k++) {
+                    result[k] = strs[0][k];
+                }
+                result[i] = '\0';
+                return result;
+            }
+        }
     }
-    maxPre++;
-  }
-  char* max = (char*)malloc(sizeof(char) * maxPre);
-  for (int i = 0; i < maxPre; i++) max[i] = strs[min][i];
-
-  return max;
+    return result;
 }
