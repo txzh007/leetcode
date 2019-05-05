@@ -34,22 +34,22 @@
  *
  */
 char *longestCommonPrefix(char **strs, int strsSize) {
-    int maxLen = strlen(strs[0]);
-    char *result;
-    for (int i = 0; i < maxLen; i++) {
+    int maxLen = 0, i = 0;
+    char *result = malloc(512);
 
-        for (int j = 1; j < strsSize; j++) {
-            if (strs[j][i] != strs[0][i]) {
-                printf("i=%d\n", i);
-                result = (char *)malloc(sizeof(char) * i);
-                printf("res length is %d\n", strlen(result));
-                for (int k = 0; k < i; k++) {
-                    result[k] = strs[0][k];
-                }
-                result[i] = '\0';
-                return result;
-            }
+    while (strsSize > 0) {
+        char c = strs[0][maxLen];
+        for (i = 1; i < strsSize; i++) {
+            if (c != strs[i][maxLen])
+                break;
+        }
+
+        if (i == strsSize && c != '\0') {
+            result[maxLen++] = c;
+        } else {
+            break;
         }
     }
+    result[maxLen++] = '\0';
     return result;
 }
