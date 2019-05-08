@@ -44,22 +44,35 @@
  *
  */
 char *countAndSay(int n) {
-    if (n == 1)
-        return "1";
-    else {
-        char *res = malloc(10);
-        res[0] = 1;
-        for (int i = 0; i < n; i++) {
-            char *tmp = res;
-            res = malloc(1000);
-            int len = 1;
+    char *str = "1";
+    if (n == 1) {
+        str = "1";
+    } else if (n == 2) {
+        str = "11";
+    } else if (n > 2) {
+        str = "11";
+        while (n > 2) {
+            char *sb = malloc(5000);
+            int count = 1;
             int index = 0;
-            for (int j = 0; j < strlen(tmp) - 1; j++) {
-                if (tmp[j] != tmp[j - 1]) {
-                    res[index++] = '0' + len;
-                    res[index++] =
+            for (int i = 1; i <= strlen(str); i++) {
+                if (i == strlen(str)) {
+                    sb[index++] = (char)(count + '0');
+                    sb[index++] = str[i - 1];
+                } else if (str[i] != str[i - 1]) {
+                    sb[index++] = (char)(count + '0');
+                    sb[index++] = str[i - 1];
+
+                    count = 1;
+                } else {
+                    count++;
                 }
             }
+            sb[index] = '\0';
+            str = sb;
+            n--;
         }
     }
+
+    return str;
 }
