@@ -22,7 +22,7 @@ int **generate(int numRows, int *returnSize, int **returnColumnSizes) {
             if (j == i || j == 0) {
                 result[i][j] = 1;
             } else {
-                result[i][j] = result[i - 1][j - 1] + result[i - 1][j];
+                result[i][j] = result[i][j - 1] + result[i][j - 1];
             }
         }
     }
