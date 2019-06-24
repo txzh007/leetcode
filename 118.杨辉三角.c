@@ -12,17 +12,18 @@
  */
 int **generate(int numRows, int *returnSize, int **returnColumnSizes) {
     *returnSize = numRows;
-    int **result = (int **)malloc(sizeof(int) * numRows);
+    *returnColumnSizes = (int *)malloc(sizeof(int) * numRows);
+    int **result = (int **)malloc(sizeof(int *) * numRows);
     for (int i = 1; i <= numRows; i++) {
-        *result[i - 1] = (int *)malloc(sizeof(int) * i);
-        *returnColumnSizes = i;
+        result[i - 1] = (int *)malloc(sizeof(int) * i);
+        (*returnColumnSizes)[i - 1] = i;
     }
-    for (int i = 0; i <= numRows; i++) {
-        for (int j = 0; j < i; j++) {
+    for (int i = 0; i < numRows; i++) {
+        for (int j = 0; j <= i; j++) {
             if (j == i || j == 0) {
                 result[i][j] = 1;
             } else {
-                result[i][j] = result[i][j - 1] + result[i][j - 1];
+                result[i][j] = result[i - 1][j] + result[i - 1][j - 1];
             }
         }
     }
