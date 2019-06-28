@@ -19,9 +19,8 @@ int getLen(struct ListNode *list) {
     return len;
 }
 struct ListNode *postIndex(struct ListNode *list, int len) {
-    while (len > 0) {
+    while (len && len--) {
         list = list->next;
-        len--;
     }
     return list;
 }
@@ -29,30 +28,23 @@ struct ListNode *postIndex(struct ListNode *list, int len) {
 struct ListNode *getIntersectionNode(struct ListNode *headA,
                                      struct ListNode *headB) {
     struct ListNode *la = headA;
-    struct ListNode *lb = headA;
+    struct ListNode *lb = headB;
     int lenA = getLen(headA);
     int lenB = getLen(headB);
 
     if (lenA > lenB) {
-        postIndex(headA, lenA - lenB);
+        la = postIndex(headA, lenA - lenB);
     } else {
-        postIndex(headB, lenB - lenA);
+        lb = postIndex(headB, lenB - lenA);
     }
-    struct ListNode *node = NULL;
 
     while (la && lb) {
         if (la == lb) {
-            if (node == NULL) {
-                node = la;
-            }
-
-            if (la->next && (la->next->val != lb->next->val)) {
-                node = NULL;
-            }
-            la = la->next;
-            lb = lb->next;
+            return la;
         }
+        la = la->next;
+        lb = lb->next;
     }
 
-    return node;
+    return NULL;
 }
