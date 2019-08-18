@@ -38,12 +38,26 @@
  * };
  */
 
-struct ListNode {
-  int val;
-  struct ListNode *next;
-};
+// struct ListNode {
+//   int val;
+//   struct ListNode *next;
+// };
+
+struct ListNode *reverseList(struct ListNode *node) {
+  struct ListNode *p = NULL;
+  struct ListNode *q;
+  while (node) {
+    q = node->next;
+    node->next = p;
+    p = node;
+    node = q;
+  }
+  return p;
+}
 
 bool isPalindrome(struct ListNode *head) {
+  if (head == NULL || head->next == NULL)
+    return true;
   //利用快慢指针
   struct ListNode *fast = head;
   struct ListNode *slow = head;
@@ -51,12 +65,12 @@ bool isPalindrome(struct ListNode *head) {
     fast = fast->next->next;
     slow = slow->next;
   }
-}
-
-struct ListNode *reverseList(struct ListNode *node) {
-  struct ListNode *p;
-  struct ListNode *q;
-  while (node) {
-    }
-  return p;
+  struct ListNode *mid = reverseList(slow->next);
+  while (head && mid) {
+    if (head->val != mid->val)
+      return false;
+    head = head->next;
+    mid = mid->next;
+  }
+  return true;
 }
