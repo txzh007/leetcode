@@ -13,22 +13,18 @@
  */
 
 bool _isSymmetric(struct TreeNode *left, struct TreeNode *right) {
-    if (left == NULL && right == NULL)
-        return true;
+  if (left == NULL && right == NULL)
+    return true;
 
-    if ((left && !right) || (!left && right))
-        return false;
-
-    if (left->val == right->val)
-        return _isSymmetric(left->left, right->right) &&
-               _isSymmetric(left->right, right->left);
-    else
-        return false;
+  if ((left && !right) || (!left && right) || (left->val != right->val))
+    return false;
+  // 左的左 和 右的右，右的左 和 左的右 比较
+  return _isSymmetric(left->left, right->right) &&
+         _isSymmetric(left->right, right->left);
 }
-
 bool isSymmetric(struct TreeNode *root) {
-    if (!root)
-        return true;
-    else
-        return _isSymmetric(root->left, root->right);
+  if (!root)
+    return true;
+  else
+    return _isSymmetric(root->left, root->right);
 }

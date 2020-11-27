@@ -13,13 +13,17 @@
  */
 
 bool isSameTree(struct TreeNode *p, struct TreeNode *q) {
-    if ((p == NULL && q != NULL) || (p != NULL && q == NULL))
-        return false;
-    if (p == NULL && q == NULL)
-        return true;
 
-    if (p->val == q->val)
-        return isSameTree(p->left, q->left) && isSameTree(p->right, q->right);
-    else
-        return false;
+  if (!p && !q) { // 都不存在 真
+    return true;
+  }
+
+  if ((p && !q) || (!p && q)) { //若有一个不存在 假
+    return false;
+  } else if (p->val != q->val) { //值不通 假
+    return false;
+  } else {
+    return isSameTree(p->left, q->left) && isSameTree(p->right, q->right);
+  }
+  return false;
 }
