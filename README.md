@@ -1,3 +1,3 @@
 # leetcode
-### 记录leetcode 代码
+### pure C 记录leetcode 代码
 
