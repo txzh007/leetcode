@@ -56,40 +56,40 @@
 // #include <string.h>
 // typedef enum { true, false } bool;
 bool isValid(char *s) {
-    int index = 0; // 充当栈指针
-    char *stark = (char *)malloc(sizeof(char) *
-                                 (strlen(s) + 1)); // 创建一个char数组 充当栈
-    for (int i = 0; i < strlen(s); i++) {
-        switch (s[i]) {
-        case '}':
-            if (stark[index] != '{')
-                return false;
-            else {
-                index--;
-            }
-            break;
-        case ']':
-            if (stark[index] != '[')
-                return false;
-            else {
-                index--;
-            }
-            break;
-        case ')':
-            if (stark[index] != '(')
-                return false;
-            else {
-                index--;
-            }
-            break;
-
-        default:
-            stark[++index] = s[i];
-            break;
-        }
-    }
-    if (index > 0)
+  int index = 0; // 充当栈指针
+  char *stark =
+      (char *)malloc(sizeof(char) * (strlen(s) + 1)); // 创建一个char数组 充当栈
+  for (int i = 0; i < strlen(s); i++) {
+    switch (s[i]) {
+    case '}':
+      if (stark[index] != '{')
         return false;
-    else
-        return true;
+      else {
+        index--;
+      }
+      break;
+    case ']':
+      if (stark[index] != '[')
+        return false;
+      else {
+        index--;
+      }
+      break;
+    case ')':
+      if (stark[index] != '(')
+        return false;
+      else {
+        index--;
+      }
+      break;
+
+    default:
+      stark[++index] = s[i];
+      break;
+    }
+  }
+  if (index > 0)
+    return false;
+  else
+    return true;
 }
